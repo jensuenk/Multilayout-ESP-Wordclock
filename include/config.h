@@ -6,11 +6,13 @@
 //--------------------------------------------------------------------------
 // Front panel layout
 //--------------------------------------------------------------------------
+
+#define DEFAULT_LAYOUT Nl15x15WeatherPeriods
 /**********************/
 /*       German       */
 /**********************/
 //
-#define DEFAULT_LAYOUT Ger10x11
+//#define DEFAULT_LAYOUT Ger10x11
 // 10 rows, 11 LEDs per row + 4 LEDs for minutes
 //
 // #define DEFAULT_LAYOUT Ger10x11Alternative

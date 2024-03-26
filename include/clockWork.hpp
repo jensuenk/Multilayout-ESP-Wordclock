@@ -40,6 +40,14 @@ void ClockWork::loopLdrLogic() {
 
 iUhrType *ClockWork::getPointer(uint8_t type) {
     switch (type) {
+    case Nl15x15Weather:
+        return &_nl15x15Weather;
+    case Nl15x15Periods:
+        return &_nl15x15Periods;
+    case Nl15x15:
+        return &_nl15x15;
+    case Nl15x15WeatherPeriods:
+        return &_nl15x15WeatherPeriods;
     case Ger10x11:
         return &_de10x11;
     case Ger10x11Alternative:
@@ -366,7 +374,7 @@ uint8_t ClockWork::determineWhichMinuteVariant() {
         return 0;
         break;
     default:
-        Serial.println("[ERROR] G.minuteVariant undefined");
+        //Serial.println("[ERROR] G.minuteVariant undefined");
         return 0;
         break;
     }
@@ -727,6 +735,16 @@ void ClockWork::setMinute(uint8_t min, uint8_t &offsetHour, bool &fullHour) {
 void ClockWork::setHour(uint8_t hour, const bool fullHour) {
     bool midnight = isMidnight(hour);
 
+    if (hour < 6) {
+        usedUhrType->show(FrontWord::w_nacht);
+    } else if (hour < 12) {
+        usedUhrType->show(FrontWord::w_morgen);
+    } else if (hour < 18) {
+        usedUhrType->show(FrontWord::w_mittag);
+    } else {
+        usedUhrType->show(FrontWord::w_abend);
+    }
+
     if (!usedUhrType->has24HourLayout()) {
         hour %= 12;
     }
@@ -812,7 +830,6 @@ void ClockWork::setHour(uint8_t hour, const bool fullHour) {
     case 23:
         usedUhrType->show(FrontWord::hour_23);
         break;
-
     default:
         break;
     }

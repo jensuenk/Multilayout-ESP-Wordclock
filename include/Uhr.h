@@ -273,6 +273,10 @@ enum ClockType {
     Fr10x11 = 21,
     Se10x11 = 22,
     Ru10x11 = 23,
+    Nl15x15Weather = 24,
+    Nl15x15 = 25,
+    Nl15x15WeatherPeriods = 26,
+    Nl15x15Periods = 27,
 };
 
 enum Icons {
