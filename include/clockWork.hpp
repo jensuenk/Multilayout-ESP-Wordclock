@@ -466,7 +466,8 @@ FrontWord ClockWork::getFrontWordForNum(uint8_t min) {
 //------------------------------------------------------------------------------
 
 bool ClockWork::hasTwentyAndCheckForUsage() {
-    return usedUhrType->hasZwanzig() || G.languageVariant[ItIs40];
+    return usedUhrType->hasZwanzig();
+    //return usedUhrType->hasZwanzig() || G.languageVariant[ItIs40];
 }
 
 //------------------------------------------------------------------------------
@@ -526,7 +527,7 @@ void ClockWork::setMinute(uint8_t min, uint8_t &offsetHour, bool &fullHour) {
         case 10:
             usedUhrType->show(getFrontWordForNum(min));
             if (G.UhrtypeDef != Fr10x11) {
-                usedUhrType->show(FrontWord::nach);
+                usedUhrType->show(FrontWord::v_nach);
             }
             break;
         case 11:
@@ -687,7 +688,7 @@ void ClockWork::setMinute(uint8_t min, uint8_t &offsetHour, bool &fullHour) {
                 usedUhrType->show(FrontWord::min_50);
             } else {
                 usedUhrType->show(getFrontWordForNum(60 - min));
-                usedUhrType->show(FrontWord::vor);
+                usedUhrType->show(FrontWord::v_vor);
             }
             offsetHour = 1;
             break;
@@ -700,7 +701,7 @@ void ClockWork::setMinute(uint8_t min, uint8_t &offsetHour, bool &fullHour) {
                 usedUhrType->show(FrontWord::min_55);
             } else {
                 usedUhrType->show(getFrontWordForNum(60 - min));
-                usedUhrType->show(FrontWord::vor);
+                usedUhrType->show(FrontWord::v_vor);
             }
             offsetHour = 1;
             break;
