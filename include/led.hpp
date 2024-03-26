@@ -287,14 +287,15 @@ void Led::setbySecondArray(ColorPosition colorPosition) {
 void Led::setIcon(uint8_t iconNum) {
     resetFrontMatrixBuffer();
     uint8_t offsetCol = (usedUhrType->colsWordMatrix() - GRAFIK_11X10_COLS) / 2;
+    uint8_t offsetRow = (usedUhrType->rowsWordMatrix() - GRAFIK_11X10_ROWS) / 2 + 1;
 
     for (uint8_t col = 0; col < GRAFIK_11X10_COLS; col++) {
         for (uint8_t row = 0; row < GRAFIK_11X10_ROWS; row++) {
             if (pgm_read_word(&(grafik_11x10[iconNum][row])) &
                 (1 << (GRAFIK_11X10_COLS - col - 1))) {
-                usedUhrType->setFrontMatrixPixel(row, col + offsetCol);
+                usedUhrType->setFrontMatrixPixel(row + offsetRow, col + offsetCol);
             } else {
-                usedUhrType->setFrontMatrixPixel(row, col + offsetCol, false);
+                usedUhrType->setFrontMatrixPixel(row + offsetRow, col + offsetCol, false);
             }
         }
     }
@@ -477,12 +478,14 @@ void Led::showNumbers(const char d1, const char d2) {
 
 //------------------------------------------------------------------------------
 
-fontSize Led::determineFontSize() {
-
+fontSize Led::determineFontSize() {        
+    return normalSizeASCII;
+    /*
     if (G.UhrtypeDef == Ger16x18) {
         return normalSizeASCII;
     }
     return smallSizeNumbers;
+    */
 }
 
 //------------------------------------------------------------------------------
